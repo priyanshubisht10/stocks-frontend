@@ -1,10 +1,7 @@
-function App() {
+import Layout from "./Layout/Layout";
 
-  return (
-    <>
-      Stocks Frontend
-    </>
-  )
-}
+const App = () => {
+  return <Layout />;
+};
 
-export default App
+export default App;

@@ -4,6 +4,7 @@ const Header = () => {
   const location = useLocation();
   const isExploreActive =
     location.pathname === "/" || location.pathname === "/home";
+  const isDashboardActive = location.pathname.startsWith("/dashboard");
   return (
     <div className="flex flex-row justify-around items-center mt-2">
       <div>
@@ -11,9 +12,11 @@ const Header = () => {
       </div>
       <div className="flex flex-row gap-[50px] text-xl">
         <div className={isExploreActive ? "text-green-500 font-bold" : ""}>
-          Explore
+          <Link to="/">Explore</Link>
         </div>
-        <div>Dashboard</div>
+        <div className={isDashboardActive ? "text-green-500 font-bold" : ""}>
+          <Link to="/dashboard">Dashboard</Link>
+        </div>
       </div>
       <div className="flex flex-row gap-2">
         <input

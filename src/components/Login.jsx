@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 const Login = () => {
   const location = useLocation();
   const isLoginPage = location.pathname === "/login";
-  const isSignupPage = location.pathname === "/register";
+  const isSignupPage = location.pathname === "/signup";
   return (
     <div className="w-[100vw] h-[100vh] bg-slate-100 flex">
       <div className="bg-white w-[30%] mx-auto my-auto rounded-lg shadow-sm border border-slate-200">
@@ -24,7 +24,7 @@ const Login = () => {
                 : "text-neutral-600"
             }`}
           >
-            <Link to="/register">Signup</Link>
+            <Link to="/signup">Signup</Link>
           </div>
         </div>
         <div>

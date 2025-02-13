@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 const Signup = () => {
   const location = useLocation();
   const isLoginPage = location.pathname === "/login";
-  const isSignupPage = location.pathname === "/register";
+  const isSignupPage = location.pathname === "/signup";
   return (
     <div className="w-[100vw] h-[100vh] bg-slate-100 flex">
       <div className="bg-white w-[30%] mx-auto my-auto rounded-lg shadow-sm border border-slate-200">
@@ -24,100 +24,27 @@ const Signup = () => {
                 : "text-neutral-600"
             }`}
           >
-            <Link to="/register">Signup</Link>
+            <Link to="/signup">Signup</Link>
           </div>
         </div>
         <div>
           <div className="p-6">
             <form className="space-y-4">
-              <div className="flex flex-row gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-neutral-600 mb-1">
-                    First Name
-                  </label>
-                  <input
-                    type="email"
-                    className="w-full p-2 border border-neutral-200 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="First Name"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-neutral-600 mb-1">
-                    Last Name
-                  </label>
-                  <input
-                    type="email"
-                    className="w-full p-2 border border-neutral-200 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Last Name"
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-neutral-600 mb-1">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  className="w-full p-2 border border-neutral-200 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="Enter your email"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-neutral-600 mb-1">
-                  Mobile Number
-                </label>
-                <input
-                  type="email"
-                  className="w-full p-2 border border-neutral-200 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="Enter Mobile Number"
-                />
-              </div>
               <div>
                 <label className="block text-sm font-medium text-neutral-600 mb-1">
                   PAN Number
                 </label>
                 <input
-                  type="email"
+                  type="text"
                   className="w-full p-2 border border-neutral-200 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="Enter PAN Number"
+                  placeholder="Enter your email"
                 />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-neutral-600 mb-1">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  className="w-full p-2 border border-neutral-200 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="Create Password"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-neutral-600 mb-1">
-                  Confirm Password
-                </label>
-                <input
-                  type="password"
-                  className="w-full p-2 border border-neutral-200 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="Confirm Password"
-                />
-              </div>
-              <div className="flex items-center justify-between">
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    className="rounded border-neutral-300 text-blue-500 focus:ring-blue-500"
-                  />
-                  <span className="ml-2 text-sm text-neutral-600">
-                    I agree to the Terms of Service and Privacy Policy.
-                  </span>
-                </label>
               </div>
               <button
                 type="submit"
                 className="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
               >
-                Signup
+                Verify
               </button>
             </form>
           </div>

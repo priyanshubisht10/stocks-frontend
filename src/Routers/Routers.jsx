@@ -5,6 +5,7 @@ import Register from "../components/Register";
 import Form from "../components/Form";
 import Home from "../components/Home";
 import Profile from "../components/Profile";
+import Dashboard from "../components/Dashboard";
 
 const Routers = () => {
   return (
@@ -17,6 +18,7 @@ const Routers = () => {
       <Route path="/" element={<Home />} />
       <Route path="/home" element={<Home />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/dashboard/*" element={<Dashboard />} />
 
       <Route path="/form" element={<Form/>}/>
     </Routes>

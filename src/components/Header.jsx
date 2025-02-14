@@ -11,10 +11,10 @@ const Header = () => {
         <h1 className="text-3xl font-bold">DirectXchange</h1>
       </div>
       <div className="flex flex-row gap-[50px] text-xl">
-        <div className={isExploreActive ? "text-green-500 font-bold" : ""}>
+        <div className={isExploreActive ? "text-blue-500 font-bold" : ""}>
           <Link to="/">Explore</Link>
         </div>
-        <div className={isDashboardActive ? "text-green-500 font-bold" : ""}>
+        <div className={isDashboardActive ? "text-blue-500 font-bold" : ""}>
           <Link to="/dashboard">Dashboard</Link>
         </div>
       </div>

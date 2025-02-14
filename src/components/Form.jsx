@@ -3,7 +3,7 @@ const Form = () => {
   const [type, setType] = useState("buy");
   const [orderType, setOrderType] = useState("market");
   return (
-    <div className="flex flex-col border border-slate-200 m-4 p-4">
+    <div className="flex flex-col border border-slate-200 p-4">
       <div className="text-xl font-bold">bank,price</div>
       <div className="flex gap-4 mb-6">
         <button

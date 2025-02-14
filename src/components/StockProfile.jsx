@@ -1,6 +1,75 @@
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom"; // Import useParams
 import Form from "./Form";
+import StockChart from "./StockChart"; // Import the StockChart component
 
 const StockProfile = () => {
+  const { stockSymbol } = useParams(); // Retrieve stockSymbol from URL params
+  const [chartData, setChartData] = useState([]); // State to store chart data
+
+  // Fetch historical data when the component mounts
+  useEffect(() => {
+    const fetchHistoricalData = async () => {
+      try {
+        const response = await fetch(`http://localhost:8000/api/v1/stock/data-points/${stockSymbol}`);
+        const data = await response.json(); // Parse the response as JSON
+        console.log(data);
+
+        if (data.status === "success") {
+          // Initialize chartData with historical data
+          setChartData(data.data.history);
+          console.log("Initial chartData:", data.data.history);
+        } else {
+          console.error("Failed to fetch historical data:", data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching historical data:", error);
+      }
+    };
+
+    fetchHistoricalData();
+  }, [stockSymbol]);
+
+  // Connect to WebSocket server and listen for updates
+  useEffect(() => {
+    const ws = new WebSocket("ws://localhost:3000");
+
+    ws.onopen = () => {
+      console.log("WebSocket connection established");
+      // Subscribe to the stock symbol
+      ws.send(JSON.stringify({ stock_symbol: stockSymbol }));
+    };
+
+    ws.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+      if (message.stock === stockSymbol) {
+        // Log the received price
+        console.log(`Received price for ${stockSymbol}: ${message.price}`);
+
+        // Update chartData with the new price
+        const newDataPoint = {
+          timestamp: new Date(message.timestamp).toLocaleString(),
+          price: message.price,
+        };
+
+        setChartData((prevData) => {
+          const updatedData = [...prevData, newDataPoint];
+          console.log("Updated chartData:", updatedData); // Log the updated chartData
+          return updatedData;
+        });
+      }
+    };
+
+    ws.onclose = () => {
+      console.log("WebSocket connection closed");
+    };
+
+    // Cleanup function to close the WebSocket connection when the component unmounts
+    return () => {
+      ws.close();
+    };
+  }, [stockSymbol]);
+
   return (
     <div className="ml-24 p-6">
       {/* Top Section */}
@@ -8,17 +77,22 @@ const StockProfile = () => {
         {/* Left Panel - Stock Details */}
         <div className="lg:w-3/5">
           <div className="flex flex-row gap-6 items-center">
-            <img className="w-24 h-24 border border-gray-300 rounded-lg" src="" alt="" />
+            <img
+              className="w-24 h-24 border border-gray-300 rounded-lg"
+              src=""
+              alt=""
+            />
             <div>
-              <h1 className="text-4xl font-bold text-blue-600">Symbol</h1>
+              <h1 className="text-4xl font-bold text-blue-600">{stockSymbol}</h1>
               <h2 className="text-lg text-gray-700">Company Name</h2>
             </div>
           </div>
 
           {/* Stock Graph */}
           <div className="my-6">
-            <div className="border border-gray-300 w-full h-[400px] flex items-center justify-center rounded-lg shadow-md bg-gray-50">
-              <p className="text-gray-500">Graph here</p>
+            <div className="border border-gray-300 w-full h-[400px] rounded-lg shadow-md p-4">
+              {/* Replace the placeholder with the StockChart component */}
+              <StockChart chartData={chartData} />
             </div>
           </div>
         </div>
@@ -40,17 +114,18 @@ const StockProfile = () => {
         {/* Description & Stats */}
         <div className="py-4">
           <p className="text-gray-700 text-md">
-            <strong>Company description:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <strong>Company description:</strong> Lorem ipsum dolor sit amet
+            consectetur adipisicing elit.
           </p>
 
           {/* Today's Stats */}
           <div className="flex flex-wrap gap-6 mt-6">
             <div className="border border-gray-300 shadow-md p-4 rounded-lg w-[150px]">
-              <p className="text-gray-600">Today's Low</p>
+              <p className="text-gray-600">Today&apos;s Low</p>
               <p className="text-lg font-semibold text-blue-500">$123.45</p>
             </div>
             <div className="border border-gray-300 shadow-md p-4 rounded-lg w-[150px]">
-              <p className="text-gray-600">Today's High</p>
+              <p className="text-gray-600">Today&apos;s High</p>
               <p className="text-lg font-semibold text-blue-500">$150.75</p>
             </div>
           </div>

@@ -25,7 +25,7 @@ const TopChart = ({ stock_symbol }) => {
             };
          });
 
-         // transformedData.sort((a, b) => new Date(a.date) - new Date(b.date));
+         transformedData.sort((a, b) => new Date(a.date) - new Date(b.date));
 
          setStockData(transformedData);
       } else {

@@ -3,9 +3,9 @@ import StockCard from "./StockCard"
 
 const MiddleComponent = () => {
   let stock = {
-    id: 1,
-    name: "Tesla",
-    symbol: "TSLA",
+    id: 'JAE',
+    name: "Just Another Employee",
+    symbol: "JAE",
     price: 750.45,
     change: 5.2,
     logo: "https://logo.clearbit.com/tesla.com",

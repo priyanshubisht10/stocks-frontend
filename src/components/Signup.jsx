@@ -23,9 +23,9 @@ const Signup = () => {
     setError("");
 
     try {
-      const response = await axios.post("http://localhost:5000/api/pan-verify", { pan_number: pan });
+      const response = await axios.post("http://localhost:8000/api/v1/user/pan-verify", { pan_number: pan });
       const panDetails = response.data.data;
-
+      console.log(panDetails)
       navigate("/register", { state: { panDetails } });
     } catch (err) {
       setError("Failed to verify PAN. Please try again.",err);

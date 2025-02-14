@@ -49,7 +49,7 @@ const Wallet = () => {
           />
           <button
             onClick={handleTopUp}
-            className="flex items-center bg-green-500 text-white px-5 py-3 rounded-lg hover:bg-green-600 transition"
+            className="flex items-center bg-blue-500 text-white px-5 py-3 rounded-lg hover:bg-blue-600 transition"
           >
             <FaPlusCircle className="mr-2" />
             Add
@@ -67,7 +67,7 @@ const Wallet = () => {
             {transactions.map((tx, index) => (
               <li key={index} className="flex justify-between p-3 bg-gray-100 rounded-lg">
                 <span className="text-gray-600">{tx.date}</span>
-                <span className="font-semibold text-green-600">+₹{tx.amount.toLocaleString()}</span>
+                <span className="font-semibold text-blue-600">+₹{tx.amount.toLocaleString()}</span>
               </li>
             ))}
           </ul>

@@ -9,8 +9,8 @@ const Form = () => {
         <button
           className={`flex-1 py-3 rounded transition-colors ${
             type === "buy"
-              ? "bg-green-500 text-white"
-              : "bg-white border border-green-500 text-green-500"
+              ? "bg-blue-500 text-white"
+              : "bg-white border border-blue-500 text-blue-500"
           }`}
           onClick={() => setType("buy")}
         >
@@ -19,8 +19,8 @@ const Form = () => {
         <button
           className={`flex-1 py-3 rounded transition-colors ${
             type === "sell"
-              ? "bg-green-500 text-white"
-              : "bg-white border border-green-500 text-green-500"
+              ? "bg-blue-500 text-white"
+              : "bg-white border border-blue-500 text-blue-500"
           }`}
           onClick={() => setType("sell")}
         >
@@ -100,7 +100,7 @@ const Form = () => {
 
         <button
           type="submit"
-          className="w-full py-3 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
+          className="w-full py-3 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
         >
           Place Buy Order
         </button>

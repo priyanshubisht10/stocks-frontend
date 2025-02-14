@@ -6,7 +6,7 @@ const Header = () => {
     location.pathname === "/" || location.pathname === "/home";
   const isDashboardActive = location.pathname.startsWith("/dashboard");
   return (
-    <div className="flex flex-row justify-around items-center mt-2">
+    <div className="flex flex-row justify-around items-center my-auto py-3">
       <div>
         <h1 className="text-3xl font-bold">DirectXchange</h1>
       </div>

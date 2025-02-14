@@ -2,6 +2,7 @@ import { Link, Navigate, Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import MyOrders from "./MyOrders";
 import Wallet from "./Wallet";
+import Portfolio from "./Portfolio";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("orders");
@@ -37,6 +38,19 @@ const Dashboard = () => {
               Wallet
             </Link>
           </li>
+          <li>
+            <Link
+              to="/dashboard/portfolio"
+              onClick={() => setActiveTab("portfolio")}
+              className={`block p-3 rounded ${
+                activeTab === "portfolio"
+                  ? "bg-blue-500 text-white"
+                  : "hover:bg-blue-200"
+              }`}
+            >
+              Portfolio
+            </Link>
+          </li>
         </ul>
       </div>
       <div className="w-2/3 p-6">
@@ -44,6 +58,7 @@ const Dashboard = () => {
           <Route path="/" element={<Navigate to="orders" replace />} />
           <Route path="orders" element={<MyOrders />} />
           <Route path="wallet" element={<Wallet />} />
+          <Route path="portfolio" element={<Portfolio />} />
         </Routes>
       </div>
     </div>

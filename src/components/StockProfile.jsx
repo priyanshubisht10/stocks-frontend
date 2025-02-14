@@ -2,75 +2,78 @@ import Form from "./Form";
 
 const StockProfile = () => {
   return (
-    <div className="ml-[100px]">
-      <div>
-        <div className="flex flex-row mt-[60px]">
-          <div className="w-[60%]">
-            <div className="flex flex-col">
-              <div className="flex flex-row justify-left gap-[40px]">
-                <img className="w-[100px] h-[100px]" src="" alt="" />
-                <div className="flex flex-col gap-4">
-                  <h1 className="text-4xl font-bold text-blue-500">Symbol</h1>
-                  <h1 className="text-xl">Company Name</h1>
-                </div>
-              </div>
-              <div className="my-4">
-                <div className="border border-slate-200 w-full h-[500px]">
-                  Graph here
-                </div>
-              </div>
+    <div className="ml-24 p-6">
+      {/* Top Section */}
+      <div className="flex flex-col lg:flex-row mt-10 gap-10">
+        {/* Left Panel - Stock Details */}
+        <div className="lg:w-3/5">
+          <div className="flex flex-row gap-6 items-center">
+            <img className="w-24 h-24 border border-gray-300 rounded-lg" src="" alt="" />
+            <div>
+              <h1 className="text-4xl font-bold text-blue-600">Symbol</h1>
+              <h2 className="text-lg text-gray-700">Company Name</h2>
             </div>
           </div>
-          <div className="w-[40%] px-6">
-            <Form />
+
+          {/* Stock Graph */}
+          <div className="my-6">
+            <div className="border border-gray-300 w-full h-[400px] flex items-center justify-center rounded-lg shadow-md bg-gray-50">
+              <p className="text-gray-500">Graph here</p>
+            </div>
           </div>
         </div>
-        <div>
-          <div className="border-b-2 py-2 mr-[80px]">
-            <h1 className="inline py-2 text-xl font-bold text-blue-500 border-b-2 border-blue-500">
-              Overview
-            </h1>
-          </div>
-          <div className="py-4 w-[60%]">
-            <h1>
-              Company description : Lorem ipsum dolor, sit amet consectetur
-              adipisicing elit.
-            </h1>
-            <div className="flex flex-row justify-between">
-              <div className="border border-slate-200 shadow-md flex flex-col gap-4 p-4 mt-4 rounded-md">
-                <p>Today's Low</p>
-                <p>price</p>
-              </div>
-              <div className="border border-slate-200 shadow-md flex flex-col gap-4 p-4 mt-4 rounded-md">
-                <p>Today's High</p>
-                <p>price</p>
-              </div>
-              <div></div>
-            </div>
-          </div>
-          <div></div>
+
+        {/* Right Panel - Form */}
+        <div className="lg:w-2/5 px-6">
+          <Form />
         </div>
       </div>
-      <div className="flex flex-row flex-wrap justify-between gap-[20px] border-t-2 border-slate-200 mr-[80px] mt-4">
-        <div className="flex flex-col gap-2 p-4 mt-4 rounded-md">
-          <p>Open</p>
-          <p>price</p>
+
+      {/* Overview Section */}
+      <div className="mt-8">
+        <div className="border-b-2 pb-2">
+          <h1 className="inline-block text-xl font-bold text-blue-600 border-b-2 border-blue-600">
+            Overview
+          </h1>
         </div>
-        <div className="flex flex-col gap-2 p-4 mt-4 rounded-md">
-          <p>Close</p>
-          <p>price</p>
+
+        {/* Description & Stats */}
+        <div className="py-4">
+          <p className="text-gray-700 text-md">
+            <strong>Company description:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </p>
+
+          {/* Today's Stats */}
+          <div className="flex flex-wrap gap-6 mt-6">
+            <div className="border border-gray-300 shadow-md p-4 rounded-lg w-[150px]">
+              <p className="text-gray-600">Today's Low</p>
+              <p className="text-lg font-semibold text-blue-500">$123.45</p>
+            </div>
+            <div className="border border-gray-300 shadow-md p-4 rounded-lg w-[150px]">
+              <p className="text-gray-600">Today's High</p>
+              <p className="text-lg font-semibold text-blue-500">$150.75</p>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-2 p-4 mt-4 rounded-md">
-          <p>Open</p>
-          <p>price</p>
+      </div>
+
+      {/* Market Data Section */}
+      <div className="flex flex-wrap justify-between gap-6 border-t-2 border-gray-300 mt-6 pt-6">
+        <div className="flex flex-col gap-1 p-4 border rounded-lg shadow-sm w-[160px]">
+          <p className="text-gray-600">Open</p>
+          <p className="text-green-600 font-semibold">$125.00</p>
         </div>
-        <div className="flex flex-col gap-2 p-4 mt-4 rounded-md">
-          <p>Open</p>
-          <p>price</p>
+        <div className="flex flex-col gap-1 p-4 border rounded-lg shadow-sm w-[160px]">
+          <p className="text-gray-600">Close</p>
+          <p className="text-red-600 font-semibold">$120.50</p>
         </div>
-        <div className="flex flex-col gap-2 p-4 mt-4 rounded-md">
-          <p>Open</p>
-          <p>price</p>
+        <div className="flex flex-col gap-1 p-4 border rounded-lg shadow-sm w-[160px]">
+          <p className="text-gray-600">Volume</p>
+          <p className="font-semibold text-gray-800">500K</p>
+        </div>
+        <div className="flex flex-col gap-1 p-4 border rounded-lg shadow-sm w-[160px]">
+          <p className="text-gray-600">Market Cap</p>
+          <p className="font-semibold text-gray-800">$1.2B</p>
         </div>
       </div>
     </div>

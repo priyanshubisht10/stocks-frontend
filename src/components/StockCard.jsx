@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import axios from "axios";
 const StockCard = ({ stock }) => {
   const [isWatchlisted, setIsWatchlisted] = useState(true);
 
@@ -20,18 +21,18 @@ const StockCard = ({ stock }) => {
 
       {/* Upper Section - Logo & Name */}
       <div className="flex flex-col items-center gap-3">
-        <img className="w-14 h-14 border border-gray-400 rounded-full" src={stock.logo} alt={stock.name} />
+        <img className="w-14 h-14 border border-gray-400 rounded-full" src={stock.stock_img_url} alt={stock.company_name} />
         <div className="text-center">
-          <h1 className="text-lg font-semibold text-gray-800">{stock.symbol}</h1>
-          <h3 className="text-sm text-gray-600">{stock.name}</h3>
+          <h1 className="text-lg font-semibold text-gray-800">{stock.stock_symbol}</h1>
+          <h3 className="text-sm text-gray-600">{stock.company_name}</h3>
         </div>
       </div>
 
       {/* Lower Section - Price & Change */}
       <div className="flex justify-between items-center px-4 py-2 w-full bg-gray-100 rounded-md">
-        <p className="text-lg font-semibold text-gray-900">${stock.price.toFixed(2)}</p>
-        <p className={`${stock.change >= 0 ? "text-green-500" : "text-red-500"} font-medium`}>
-          {stock.change >= 0 ? `+${stock.change}%` : `${stock.change}%`}
+        <p className="text-lg font-semibold text-gray-900">${stock.current_price}</p>
+        <p className={`${stock.price_change_percentage >= 0 ? "text-green-500" : "text-red-500"} font-medium`}>
+          {stock.price_change_percentage}%
         </p>
       </div>
     </div>

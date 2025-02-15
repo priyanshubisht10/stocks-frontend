@@ -1,24 +1,35 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"; // Import useParams
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Form from "./Form";
-import StockChart from "./StockChart"; // Import the StockChart component
+import StockChart from "./StockChart";
+import Slider from "./Slider"; // Import the Slider component
 
 const StockProfile = () => {
   const { stockSymbol } = useParams(); // Retrieve stockSymbol from URL params
   const [chartData, setChartData] = useState([]); // State to store chart data
+  const [dayLow, setDayLow] = useState(0); // State for day's low price
+  const [dayHigh, setDayHigh] = useState(0); // State for day's high price
+  const [currentPrice, setCurrentPrice] = useState(0); // State for current price
 
   // Fetch historical data when the component mounts
   useEffect(() => {
     const fetchHistoricalData = async () => {
       try {
         const response = await fetch(`http://localhost:8000/api/v1/stock/data-points/${stockSymbol}`);
-        const data = await response.json(); // Parse the response as JSON
+        const data = await response.json();
         console.log(data);
 
         if (data.status === "success") {
           // Initialize chartData with historical data
           setChartData(data.data.history);
           console.log("Initial chartData:", data.data.history);
+
+          if (data.data.history.length > 0) {
+            const lastDataPoint = data.data.history[data.data.history.length - 1];
+            setDayLow(lastDataPoint.day_low);
+            setDayHigh(lastDataPoint.day_high);
+            setCurrentPrice(lastDataPoint.price);
+          }
         } else {
           console.error("Failed to fetch historical data:", data.message);
         }
@@ -50,6 +61,8 @@ const StockProfile = () => {
         const newDataPoint = {
           timestamp: new Date(message.timestamp).toLocaleString(),
           price: message.price,
+          day_low: message.day_low,
+          day_high: message.day_high,
         };
 
         setChartData((prevData) => {
@@ -57,6 +70,11 @@ const StockProfile = () => {
           console.log("Updated chartData:", updatedData); // Log the updated chartData
           return updatedData;
         });
+
+        // Update dayLow, dayHigh, and currentPrice in real-time
+        setDayLow(message.day_low);
+        setDayHigh(message.day_high);
+        setCurrentPrice(message.price);
       }
     };
 
@@ -64,7 +82,6 @@ const StockProfile = () => {
       console.log("WebSocket connection closed");
     };
 
-    // Cleanup function to close the WebSocket connection when the component unmounts
     return () => {
       ws.close();
     };
@@ -92,8 +109,12 @@ const StockProfile = () => {
           <div className="my-6">
             <div className="border border-gray-300 w-full h-[400px] rounded-lg shadow-md p-4">
               {/* Replace the placeholder with the StockChart component */}
-              <StockChart chartData={chartData} />
-            </div>
+              <StockChart chartData={chartData} dayLow={dayLow} dayHigh={dayHigh} />            </div>
+          </div>
+
+          {/* Real-Time Slider */}
+          <div className="mt-6">
+            <Slider dayLow={dayLow} dayHigh={dayHigh} currentPrice={currentPrice} />
           </div>
         </div>
 
@@ -122,11 +143,11 @@ const StockProfile = () => {
           <div className="flex flex-wrap gap-6 mt-6">
             <div className="border border-gray-300 shadow-md p-4 rounded-lg w-[150px]">
               <p className="text-gray-600">Today&apos;s Low</p>
-              <p className="text-lg font-semibold text-blue-500">$123.45</p>
+              <p className="text-lg font-semibold text-blue-500">${dayLow.toFixed(2)}</p>
             </div>
             <div className="border border-gray-300 shadow-md p-4 rounded-lg w-[150px]">
               <p className="text-gray-600">Today&apos;s High</p>
-              <p className="text-lg font-semibold text-blue-500">$150.75</p>
+              <p className="text-lg font-semibold text-blue-500">${dayHigh.toFixed(2)}</p>
             </div>
           </div>
         </div>

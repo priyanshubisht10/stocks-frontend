@@ -35,9 +35,9 @@ const Register = () => {
         email: panDetails.email || "",
         phone_number: panDetails.phone_number || "",
         pan_number: panDetails.pan_number || "",
-        address1: panDetails.address?.line_1 || "",
-        address2: panDetails.address?.line_2 || "",
-        street: panDetails.address?.street_name || "",
+        address1: "panDetails.address?.line_1 ? panDetails.address?.line_1 : formData.address1",
+        address2: "panDetails.address?.line_2 ? panDetails.address?.line_2 : formData.address2",
+        street: "panDetails.address?.street_name ? panDetails.address?.street_name: formData.str",
         zip: panDetails.address?.zip || "",
         city: panDetails.address?.city || "",
         state: panDetails.address?.state || "",
@@ -57,8 +57,8 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
+    if (!formData.password) {
+      alert("Please provide a password");
       return;
     }
 
@@ -67,12 +67,12 @@ const Register = () => {
         email: formData.email,
         username: formData.firstName + formData.lastName,
         password: formData.password,
-        role: formData.role,
+        role: "user",
         full_name: formData.firstName + " " + formData.lastName,
         phone_number: formData.phone_number,
-        address1: formData.address1,
-        address2: formData.address2,
-        street: formData.street,
+        addressLine1: "panDetails.address?.line_1 ? panDetails.address?.line_1 : formData.address1",
+        addressLine2: "panDetails.address?.line_2 ? panDetails.address?.line_2 : formData.address2",
+        streetName: "panDetails.address?.street_name ? panDetails.address?.street_name: formData.str",
         zip: formData.zip,
         city: formData.city,
         state: formData.state,
@@ -163,7 +163,7 @@ const Register = () => {
               />
             </div>
           </div>
-  
+
           {/* Right Column */}
           <div className="w-[40%] px-[50px] flex flex-col gap-3">
             <div>
@@ -253,7 +253,7 @@ const Register = () => {
             </div>
           </div>
         </div>
-  
+
         <div className="w-full flex flex-row justify-center mt-7">
           <button type="submit" className="w-[30%] py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
             Register
@@ -262,10 +262,10 @@ const Register = () => {
       </form>
     </div>
   );
-  
-  
-  
-  
+
+
+
+
 };
 
 export default Register;
